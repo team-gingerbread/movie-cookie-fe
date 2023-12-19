@@ -1,0 +1,51 @@
+<!-- recommend/index.html -->
+<!-- 인풋 입력 페이지 -->
+<!DOCTYPE html>
+<html lang="ko-KR">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Movie Cookie</title>
+        <link rel="stylesheet" href="/style/common.css" />
+        <link rel="stylesheet" href="/recommend/style/recommend.css" />
+    </head>
+    <body>
+        <header>
+            <a href="/">Movie Cookie</a>
+            <ul>
+                <a href="/movieinfo/"><li>정보찾기</li></a>
+                <a href="/community/"><li>커뮤니티</li></a>
+                <a href="/recommend/"><li>영화추천</li></a>
+                <!-- 로그인 X -->
+                <a href="/accounts/login/"><li>로그인</li></a>
+                <a href="/accounts/signup/"><li>회원가입</li></a>
+                <!-- 로그인 O -->
+                <a href="/accounts/mypage/"><li>마이페이지</li></a>
+                <a href="#" id="logout"><li>로그아웃</li></a>
+            </ul>
+        </header>
+        <main>
+            <h1>영화 추천</h1>
+            <form>
+                <!-- 체크박스들로 수정예정 일단 textarea로 fetch테스트 -->
+                <span>좋아하는 영화 장르가 무엇인가요?</span>
+                <textarea id="genre" placeholder="|로 구분"></textarea>
+                <br />
+                <span>어떤 나라의 영화를 보고 싶으신가요?</span>
+                <textarea id="nation" placeholder="|로 구분"></textarea>
+                <br />
+
+                <span>언제 개봉했던 영화를 보고 싶으신가요?</span>
+                <textarea id="period" placeholder="|로 구분"></textarea>
+                <br />
+
+                <button type="submit">추천</button>
+            </form>
+        </main>
+        <footer>
+            <p>Copyright 2023 Team Gingerbread All Rights Reserved.</p>
+        </footer>
+        <script type="module" src="/script/common.js"></script>
+        <script type="module" src="/recommend/script/recommend.js"></script>
+    </body>
+</html>

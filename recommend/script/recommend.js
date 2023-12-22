@@ -4,6 +4,7 @@ import { getToken } from "/script/token.js";
 console.log("recommend.js 연결");
 const token = await getToken();
 
+// csv파일에 있는 장르들 리스트
 const genreList = [
     "SF",
     "가족",
@@ -90,17 +91,17 @@ $submit.addEventListener("click", async function (e) {
         return Array.from($checkboxes).map((checkbox) => checkbox.value);
     };
 
-    const checkedGenre = getCheckedValues("genre");
-    const checkedNation = getCheckedValues("nation");
-    const checkedPeriod = getCheckedValues("period");
+    const $checkedGenres = getCheckedValues("genre");
+    const $checkedNations = getCheckedValues("nation");
+    const $checkedPeriods = getCheckedValues("period");
 
     const inputData = {
-        genre: checkedGenre,
-        nation_korean: checkedNation.includes("국내"),
-        nation_foreign: checkedNation.includes("해외"),
-        period_2000: checkedPeriod.includes("2000"),
-        period_2010: checkedPeriod.includes("2010"),
-        period_2020: checkedPeriod.includes("2020"),
+        genre: $checkedGenres,
+        nation_korean: $checkedNations.includes("국내"),
+        nation_foreign: $checkedNations.includes("해외"),
+        period_2000: $checkedPeriods.includes("2000"),
+        period_2010: $checkedPeriods.includes("2010"),
+        period_2020: $checkedPeriods.includes("2020"),
     };
 
     // 영화 추천 요청 보내기
@@ -119,11 +120,10 @@ $submit.addEventListener("click", async function (e) {
         window.location.reload();
     }
 
-    // 성공 시 상세보기 창으로 넘어감
+    // 성공 시 저장 후 상세보기 창으로 넘어감
     const result = await response.json();
     console.log(result);
     if (token) {
-        console.log(token);
         const response = await fetch(`${backend}recommend/`, {
             headers: {
                 Authorization: `Bearer ${token}`,
@@ -140,9 +140,9 @@ $submit.addEventListener("click", async function (e) {
             window.location.reload();
         }
 
-        const res1 = await response.json();
-        console.log(res1);
-        window.location.replace(`/recommend/detail/?db-id=${res1.id}`);
+        const res = await response.json();
+        console.log(res);
+        window.location.replace(`/recommend/detail/?db-id=${res.id}`);
     } else {
         localStorage.setItem(localStorage.length, JSON.stringify(result));
         window.location.replace(`/recommend/detail/?local-id=${localStorage.length - 1}`);

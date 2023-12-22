@@ -28,22 +28,42 @@
             </nav>
         </header>
         <main>
-            <h1>영화 추천</h1>
-            <form>
-                <!-- 체크박스들로 수정예정 일단 textarea로 fetch테스트 -->
-                <span>좋아하는 영화 장르가 무엇인가요?</span>
-                <textarea id="genre" placeholder="|로 구분"></textarea>
-                <br />
-                <span>어떤 나라의 영화를 보고 싶으신가요?</span>
-                <textarea id="nation" placeholder="|로 구분"></textarea>
-                <br />
-
-                <span>언제 개봉했던 영화를 보고 싶으신가요?</span>
-                <textarea id="period" placeholder="|로 구분"></textarea>
-                <br />
-
-                <button type="submit">추천</button>
-            </form>
+            <div class="main-content">
+                <div class="content-head recommend-head">
+                    <div class="content-title cookiestyle-strong">영화 추천</div>
+				</div>
+                <form>
+                    <div class='desc'>좋아하는 영화 장르가 무엇인가요?</div>
+                    <div class='checkboxes' id='genres'></div>
+                    <div class='desc'>어떤 나라의 영화를 보고 싶으신가요?</div>
+                    <div class='checkboxes'>
+                        <label>
+                            <input name='nation' type="checkbox" value="국내">
+                            <span>국내</span>
+                        </label>
+                        <label>
+                            <input name='nation' type="checkbox" value="해외">
+                            <span>해외</span>
+                        </label>
+                    </div>
+                    <div class='desc'>언제 개봉했던 영화를 보고 싶으신가요?</div>
+                    <div class='checkboxes'>
+                        <label>
+                            <input name='period' type="checkbox" value="2000">
+                            <span>2000년대</span>
+                        </label>
+                        <label>
+                            <input name='period' type="checkbox" value="2010">
+                            <span>2010년대</span>
+                        </label>
+                        <label>
+                            <input name='period' type="checkbox" value="2020">
+                            <span>2020년대</span>
+                        </label>
+                    </div>
+                    <button type="submit" class='btn cookiestyle-light'>추천</button>
+                </form>
+            </div>
         </main>
         <footer>
             <p>Copyright 2023 Team Gingerbread All Rights Reserved.</p>

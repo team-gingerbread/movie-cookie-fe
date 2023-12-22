@@ -4,8 +4,8 @@
 		<meta charset="UTF-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 		<title></title>
-		<link rel="stylesheet" href="../../base/base.css" />
-		<link rel="stylesheet" href="../style/style.css" />
+		<link rel="stylesheet" href="/base/base.css" />
+		<link rel="stylesheet" href="/movieinfo/style/style.css" />
 	</head>
 
 	<body>
@@ -28,21 +28,10 @@
 		<main>
 			<div class="main-content">
 				<div class="content-head movieinfo-content-head">
-					<!-- 여기에 제목 입력 -->
+					<div><button onclick="history.back()" class="cookiestyle-medium util btn"><< 뒤로가기</button></div>
 					<div class="content-title cookiestyle-medium" id="movie-title"></div>
 					<br />
-					<div class="movieinfo-area" id="movieinfo-area">
-						<!-- <div class="movie-poster cookiestyle-medium"></div>
-						<div class="movie-text">
-							<div class="" id="director">감독:</div>
-							<div class="" id="actor">배우:</div>
-							<div class="" id="runingtime">상영시간:</div>
-							<div class="" id="ratomg">등급:</div>
-							<div class="" id="genre">장르:</div>
-							<div class="" id="release">개봉일:</div>
-							<div class="" id="company">제작사:</div>
-						</div> -->
-					</div>
+					<div class="movieinfo-area" id="movieinfo-area"></div>
 				</div>
 				<div class="bar"></div>
 				<div class="content-body movieinfo-content-body">
@@ -58,64 +47,6 @@
 		<footer>
 			<p>Copyright 2023 Team Gingerbread All Rights Reserved.</p>
 		</footer>
+		<script type="module" src="../script/detail.js"></script>
 	</body>
-	<script>
-		const backend_url = "http://127.0.0.1:5000/movieinfo/detail/";
-		const frontend_url = new URLSearchParams(window.location.search);
-		const movie = parseInt(frontend_url.get("movie"));
-		fetch(`${backend_url}${movie}/`, {
-			method: "GET",
-			headers: {
-				"Content-Type": "application/json",
-			},
-		})
-			.then((res) => res.json())
-			.then((data) => {
-				console.log(data);
-				const $movie_title = document.getElementById("movie-title");
-				$movie_title.innerText = `${data.title}`;
-				let directors = "";
-				data.directors.forEach((director) => {
-					directors += `${director.name}, `;
-				});
-				let actors = "";
-				data.actors.forEach((actor) => {
-					actors += `${actor.name}, `;
-				});
-				let genres = "";
-				data.genres.forEach((genre) => {
-					genres += `${genre.genre}, `;
-				});
-				let companies = "";
-				data.companies.forEach((company) => {
-					companies += `${company.name}, `;
-				});
-
-				const $moveinfo_area = document.getElementById("movieinfo-area");
-				const html = `<div class="movie-poster cookiestyle-medium"><img src="${
-					data.posters[0].url
-				}"/></div><div class="movie-text"><div class="" id="director">감독: ${directors.slice(
-					0,
-					-2
-				)}</div><div class="" id="actor">배우: ${actors.slice(0, -2)}</div><div class="" id="runingtime">상영시간: ${
-					data.runtime
-				}분</div><div class="" id="ratomg">등급: ${data.rating}</div><div class="" id="genre">장르: ${genres.slice(
-					0,
-					-2
-				)}</div><div class="" id="release">개봉일: ${data.release_date}</div><div class="" id="company">제작사: ${companies.slice(
-					0,
-					-2
-				)}</div></div>`;
-				$moveinfo_area.innerHTML = html;
-
-				const $video_area = document.getElementById("video-area");
-
-				const asdf = `<video class="vod" src="${data.vods[0].url}" controls="" autoplay="" muted="muted" controlslist="nodownload"></video>`;
-
-				$video_area.innerHTML = asdf;
-
-				const $plot = document.getElementById("plot");
-				$plot.innerText = data.plot;
-			});
-	</script>
 </html>

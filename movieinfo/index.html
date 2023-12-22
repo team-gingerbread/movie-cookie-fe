@@ -4,8 +4,8 @@
 		<meta charset="UTF-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 		<title></title>
-		<link rel="stylesheet" href="../base/base.css" />
-		<link rel="stylesheet" href="style/style.css" />
+		<link rel="stylesheet" href="/base/base.css" />
+		<link rel="stylesheet" href="./style/style.css" />
 	</head>
 
 	<body>
@@ -31,8 +31,13 @@
 					<!-- 여기에 제목 입력 -->
 					<div class="content-title cookiestyle-strong">영화 정보</div>
 					<br />
-					<form class="search-area">
-						<input type="text" class="searchbar cookiestyle-light" placeholder="검색할 영화 정보를 입력하세요" id="search" />
+					<form method="get" class="search-area">
+						<input
+							type="text"
+							class="searchbar cookiestyle-light"
+							placeholder="검색할 영화 제목을 입력하세요"
+							id="search"
+							name="search" />
 						<input type="submit" class="btn cookiestyle-light" value="입력" id="search_btn" />
 					</form>
 				</div>
@@ -41,9 +46,8 @@
 					<div class="table">
 						<div class="table-head">
 							<div class="item cookiestyle-light">
-								<div class="col1">표 항목 1</div>
-								<div class="col2">제목</div>
-								<div class="col3">표 항목 3</div>
+								<div class="col1">제목</div>
+								<div class="col2">좋아요</div>
 							</div>
 						</div>
 						<div class="table-body">
@@ -54,7 +58,6 @@
 							</div>
 						</div>
 					</div>
-					<input type="button" class="btn btn-rd cookiestyle-light" value="둥근 버튼" />
 				</div>
 			</div>
 		</main>
@@ -62,34 +65,6 @@
 		<footer>
 			<p>Copyright 2023 Team Gingerbread All Rights Reserved.</p>
 		</footer>
+		<script type="module" src="./script/index.js"></script>
 	</body>
-	<script>
-		const backend_url = "http://127.0.0.1:5000/movieinfo/";
-		const frontend_url = window.location;
-		const $search = document.getElementById("search");
-		const $search_btn = document.getElementById("search_btn");
-		$search_btn.addEventListener("click", async (e) => {
-			e.preventDefault();
-			const data = { query: $search.value };
-			console.log(backend_url + "search/");
-			await fetch(backend_url + "search/", {
-				method: "POST",
-				headers: {
-					"Content-Type": "application/json",
-				},
-				body: JSON.stringify(data),
-			})
-				.then((res) => res.json())
-				.then((datas) => {
-					const $table_item = document.getElementById("table-item");
-					let html = "";
-					datas.forEach((data) => {
-						const url = `${frontend_url}detail/?movie=${data.id}`;
-						html += `<div class='item' onclick='location.href="${url}"' style="cursor: pointer"><div class='col1'></div><div class='col2'>${data.title}</div><div class='col3'></div></div>`;
-					});
-					console.log(html);
-					$table_item.innerHTML = html;
-				});
-		});
-	</script>
 </html>

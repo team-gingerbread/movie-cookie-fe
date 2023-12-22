@@ -1,0 +1,74 @@
+<!-- recommend/index.html -->
+<!-- 인풋 입력 페이지 -->
+<!DOCTYPE html>
+<html lang="ko-KR">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Movie Cookie</title>
+        <link rel="stylesheet" href="/style/base.css" />
+		<link rel="stylesheet" href="/recommend/style/recommend.css" />
+    </head>
+    </head>
+    <body>
+        <header>
+            <nav>
+                <div onclick="location.href='/'" class="headertitle cookiestyle-light">Movie Cookie</div>
+                <ul>
+                    <a href="/movieinfo/"><li>정보찾기</li></a>
+                    <a href="/community/"><li>커뮤니티</li></a>
+                    <a href="/recommend/"><li>영화추천</li></a>
+                    <!-- 로그인 X -->
+                    <a href="/accounts/login/"><li>로그인</li></a>
+                    <a href="/accounts/signup/"><li>회원가입</li></a>
+                    <!-- 로그인 O -->
+                    <a href="/accounts/mypage/"><li>마이페이지</li></a>
+                    <a href="#" id="logout"><li>로그아웃</li></a>
+                </ul>
+            </nav>
+        </header>
+        <main>
+            <div class="main-content">
+                <div class="content-head recommend-head">
+                    <div class="content-title cookiestyle-strong">영화 추천</div>
+				</div>
+                <form>
+                    <div class='desc'>좋아하는 영화 장르가 무엇인가요?</div>
+                    <div class='checkboxes' id='genres'></div>
+                    <div class='desc'>어떤 나라의 영화를 보고 싶으신가요?</div>
+                    <div class='checkboxes'>
+                        <label>
+                            <input name='nation' type="checkbox" value="국내">
+                            <span>국내</span>
+                        </label>
+                        <label>
+                            <input name='nation' type="checkbox" value="해외">
+                            <span>해외</span>
+                        </label>
+                    </div>
+                    <div class='desc'>언제 개봉했던 영화를 보고 싶으신가요?</div>
+                    <div class='checkboxes'>
+                        <label>
+                            <input name='period' type="checkbox" value="2000">
+                            <span>2000년대</span>
+                        </label>
+                        <label>
+                            <input name='period' type="checkbox" value="2010">
+                            <span>2010년대</span>
+                        </label>
+                        <label>
+                            <input name='period' type="checkbox" value="2020">
+                            <span>2020년대</span>
+                        </label>
+                    </div>
+                    <button type="submit" class='btn cookiestyle-light'>추천</button>
+                </form>
+            </div>
+        </main>
+        <footer>
+            <p>Copyright 2023 Team Gingerbread All Rights Reserved.</p>
+        </footer>
+        <script type="module" src="/script/base.js"></script>
+		<script type="module" src="/recommend/script/recommend.js"></script>
+    </body>
+</html>

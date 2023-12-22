@@ -1,10 +1,10 @@
 /* 폰트 시작 --- */
-@import url('https://fonts.googleapis.com/css?family=Black+Han+Sans:400');
-@import url('https://fonts.googleapis.com/css?family=Black+Han+Sans&display=swap&subset=korean');
+@import url("https://fonts.googleapis.com/css?family=Black+Han+Sans:400");
+@import url("https://fonts.googleapis.com/css?family=Black+Han+Sans&display=swap&subset=korean");
 
 @font-face {
-    font-family: 'Pretendard-Regular';
-    src: url('https://cdn.jsdelivr.net/gh/Project-Noonnu/noonfonts_2107@1.1/Pretendard-Regular.woff') format('woff');
+    font-family: "Pretendard-Regular";
+    src: url("https://cdn.jsdelivr.net/gh/Project-Noonnu/noonfonts_2107@1.1/Pretendard-Regular.woff") format("woff");
     font-weight: 400;
     font-style: normal;
 }
@@ -16,9 +16,6 @@
 }
 /* 폰트 끝 ---- */
 
-
-
-
 /* 초기화 시작 ---- */
 button:enabled {
     cursor: pointer;
@@ -29,67 +26,60 @@ a {
     color: inherit;
 }
 
-input{
-    outline: none
+input {
+    outline: none;
 }
 /* 초기화 끝 ---- */
 
-
-
-
 /* 스타일 적용 시작 ---- */
-.cookiestyle-strong{
+.cookiestyle-strong {
     border: 4px solid black;
-    box-shadow: 16px 16px 0px black;    
+    box-shadow: 16px 16px 0px black;
 }
 
-.cookiestyle-medium{
+.cookiestyle-medium {
     border: 2px solid black;
-    box-shadow: 8px 8px 0px black;    
+    box-shadow: 8px 8px 0px black;
 }
 
-.cookiestyle-light{
+.cookiestyle-light {
     border: 2px solid black;
-    box-shadow: 4px 4px 0px black;    
+    box-shadow: 4px 4px 0px black;
 }
 /* 스타일 적용 끝 ---- */
 
-
-
-
 /* header 영역 시작 ---- */
-header{
+header {
     width: 100%;
     height: 48px;
-    font-family: 'Black Han Sans';
+    font-family: "Black Han Sans";
     font-weight: 500;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    background-color: #FFC700;
+    background-color: #ffc700;
 }
 
-header nav{
+header nav {
     width: 70%;
     display: flex;
     flex-direction: row;
     justify-content: space-between;
     align-items: center;
-    
 }
 
-header nav ul{
+header nav ul {
     width: 600px;
     display: flex;
     font-size: 16px;
-    justify-content: space-between  ;
+    justify-content: space-between;
     flex-direction: row;
     list-style-type: none;
     list-style: none;
 }
 
-.headertitle{
+.headertitle {
     width: 140px;
     height: 32px;
     display: flex;
@@ -99,17 +89,14 @@ header nav ul{
 }
 /* header 영역 끝 ---- */
 
-
-
-
 /* 검색 영역 시작 ---- */
-.search-area{
+.search-area {
     display: flex;
     flex-direction: row;
     gap: 10px;
 }
-.searchbar{
-    font-family: 'Pretendard-Regular';
+.searchbar {
+    font-family: "Pretendard-Regular";
     font-size: 18px;
     height: 42px;
     width: 600px;
@@ -118,12 +105,9 @@ header nav ul{
 }
 /* 검색 영역 끝 =--- */
 
-
-
-
 /* 버튼 영역 시작 ---- */
-.btn{
-    font-family: 'Pretendard-Regular';
+.btn {
+    font-family: "Pretendard-Regular";
     font-size: 18px;
     font-weight: bold;
     display: flex;
@@ -131,15 +115,15 @@ header nav ul{
     align-items: center;
     width: 130px;
     height: 42px;
-    background-color: #FFC700;
+    background-color: #ffc700;
     cursor: pointer;
 }
 
-.btn-rd{
-    border-radius: 36px;    
+.btn-rd {
+    border-radius: 36px;
 }
 
-.btn:hover{
+.btn:hover {
     transition: all;
     transition-duration: 150ms;
     transition-timing-function: ease-in-out;
@@ -148,23 +132,16 @@ header nav ul{
 }
 /* 버튼 영역 끝 ---- */
 
-
-
-
 /* 바 영역 시작  ---- */
-.bar{
+.bar {
     width: 95%;
     height: 8px;
     background-color: #777;
 }
 /* 바 영역 끝 ---- */
 
-
-
-
-
 /* 표 영역 시작 ---- */
-.table{
+.table {
     width: 90%;
     display: flex;
     flex-direction: column;
@@ -172,15 +149,15 @@ header nav ul{
     align-items: center;
 }
 
-.table-head{
-    width: 100%;    
-}
-
-.table-body{
+.table-head {
     width: 100%;
 }
 
-.item{
+.table-body {
+    width: 100%;
+}
+
+.item {
     width: 100%;
     height: 32px;
     display: flex;
@@ -189,21 +166,21 @@ header nav ul{
     align-items: center;
 }
 
-.col1{
+.col1 {
     flex-grow: 1;
     display: flex;
     flex-direction: row;
     justify-content: center;
     align-items: center;
 }
-.col2{
+.col2 {
     flex-grow: 3;
     display: flex;
     flex-direction: row;
     justify-content: center;
     align-items: center;
 }
-.col3{
+.col3 {
     flex-grow: 2;
     display: flex;
     flex-direction: row;
@@ -212,20 +189,17 @@ header nav ul{
 }
 /* 표 영역 끝 ----  */
 
-
-
-
 /* 본문(main, content) 영역 시작 ---- */
-main{
+main {
     width: 100%;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    font-family: 'Pretendard-Regular';
+    font-family: "Pretendard-Regular";
 }
 
-.main-content{
+.main-content {
     width: 70%;
     display: flex;
     flex-direction: column;
@@ -233,7 +207,7 @@ main{
     align-items: center;
 }
 
-.content-head{
+.content-head {
     display: flex;
     width: 100%;
     height: 400px;
@@ -243,20 +217,20 @@ main{
     gap: 20px;
 }
 
-.content-title{
+.content-title {
     width: 360px;
     height: 90px;
-    font-family: 'Black Han Sans';
+    font-family: "Black Han Sans";
     display: flex;
     align-items: center;
     justify-content: center;
     font-size: 56px;
-    background-color: #FF5C00;
+    background-color: #ff5c00;
     color: white;
     
 }
 
-.content-body{
+.content-body {
     width: 100%;
     height: 1000px;
 
@@ -268,22 +242,18 @@ main{
 
 /* 본문(content) 영역 시작 ---- */
 
-
-
-
-
 /* footer 영역 시작 ---- */
-footer{
+footer {
     width: 100%;
     height: 36px;
-    font-family: 'Pretendard-Regular';
+    font-family: "Pretendard-Regular";
     background-color: #ffefb5;
     display: flex;
     justify-content: center;
     align-items: center;
 }
 
-footer p{
+footer p {
     display: inline-flex;
     width: 70%;
     justify-content: center;

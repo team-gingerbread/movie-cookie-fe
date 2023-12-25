@@ -6,31 +6,54 @@
         <meta charset="UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <title>Movie Cookie</title>
-        <link rel="stylesheet" href="/style/common.css" />
+        <link rel="stylesheet" href="/style/base.css" />
         <link rel="stylesheet" href="/recommend/style/recommend.css" />
     </head>
     <body>
         <header>
-            <a href="/">Movie Cookie</a>
-            <ul>
-                <a href="/movieinfo/"><li>정보찾기</li></a>
-                <a href="/community/"><li>커뮤니티</li></a>
-                <a href="/recommend/"><li>영화추천</li></a>
-                <!-- 로그인 X -->
-                <a href="/accounts/login/"><li>로그인</li></a>
-                <a href="/accounts/signup/"><li>회원가입</li></a>
-                <!-- 로그인 O -->
-                <a href="/accounts/mypage/"><li>마이페이지</li></a>
-                <a href="#" id="logout"><li>로그아웃</li></a>
-            </ul>
+            <nav>
+                <div onclick="location.href='/'" class="headertitle cookiestyle-light">Movie Cookie</div>
+                <ul>
+                    <a href="/movieinfo/"><li>정보찾기</li></a>
+                    <a href="/community/"><li>커뮤니티</li></a>
+                    <a href="/recommend/"><li>영화추천</li></a>
+                    <!-- 로그인 X -->
+                    <a href="/accounts/login/"><li>로그인</li></a>
+                    <a href="/accounts/signup/"><li>회원가입</li></a>
+                    <!-- 로그인 O -->
+                    <a href="/accounts/mypage/"><li>마이페이지</li></a>
+                    <a href="#" id="logout"><li>로그아웃</li></a>
+                </ul>
+            </nav>
         </header>
         <main>
-            <!-- 여기에 각자 프론트 작업 -->
+            <div class="main-content">
+                <div class="content-head recommend-head">
+                    <div class="content-title cookiestyle-strong">영화 추천</div>
+                </div>
+                <p class="desc">로그인을 안하면 임시 저장됩니다!</p>
+                <table>
+                    <thead>
+                        <tr class="cookiestyle-light">
+                            <th>번호</th>
+                            <th>입력한 장르</th>
+                            <th>추천 영화</th>
+                            <th>생성일</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <!-- 저장된 내용이 없을 때 뜨는 문구 -->
+                            <td id="none" colspan="4">저장된 내용이 없습니다.</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
         </main>
         <footer>
             <p>Copyright 2023 Team Gingerbread All Rights Reserved.</p>
         </footer>
-        <script type="module" src="/script/common.js"></script>
+        <script type="module" src="/script/base.js"></script>
         <script type="module" src="/recommend/script/list.js"></script>
     </body>
 </html>

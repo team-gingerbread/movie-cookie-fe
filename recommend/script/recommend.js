@@ -144,7 +144,8 @@ $submit.addEventListener("click", async function (e) {
         console.log(res);
         window.location.replace(`/recommend/detail/?db-id=${res.id}`);
     } else {
-        localStorage.setItem(localStorage.length, JSON.stringify(result));
-        window.location.replace(`/recommend/detail/?local-id=${localStorage.length - 1}`);
+        result["created_at"] = new Date();
+        localStorage.setItem(localStorage.length + 1, JSON.stringify(result));
+        window.location.replace(`/recommend/detail/?local-id=${localStorage.length}`);
     }
 });

@@ -16,7 +16,7 @@ const processData = (data, urlKey) => {
         $tr.setAttribute("onclick", "location.href='" + url + "'");
 
         const $order = document.createElement("td");
-        $order.innerText = data[i].id;
+        $order.innerText = data.length - i;
 
         const $inputs = document.createElement("td");
         $inputs.innerText = data[i].genre;
@@ -63,13 +63,11 @@ if (token) {
     }
 } else {
     // 로그인X -> 로컬스토리지 이용
-    if (localStorage.length > 0) {
-        const storedData = [];
-        for (let i = localStorage.length; i > 0; i--) {
-            const data = JSON.parse(localStorage.getItem(i));
-            data["id"] = i;
-            storedData.push(data);
-        }
-        processData(storedData, "local-id");
+    const dataSet = JSON.parse(localStorage.getItem("recommend")).reverse() || [];
+    if (dataSet.length > 0) {
+        dataSet.forEach((data, index) => {
+            data["id"] = dataSet.length - index - 1;
+        });
+        processData(dataSet, "local-id");
     }
 }

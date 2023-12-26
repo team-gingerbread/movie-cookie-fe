@@ -45,7 +45,7 @@ input[type="checkbox"]:checked ~ span {
 input[type="checkbox"] {
     display: none;
 }
-.local-btns {
+.input-btns {
     width: 500px;
     margin: 20px;
 }
@@ -59,6 +59,10 @@ table {
 th {
     padding: 4px;
 }
+tr {
+    border-bottom: 2px solid #e9e9e9;
+    height: 38px;
+}
 td {
     padding: 5px;
 }
@@ -67,9 +71,50 @@ td {
     transition: background-color 0.3s ease;
 }
 .click-tr:hover {
-    background-color: #ffefb5;
+    transition: all;
+    transition-duration: 100ms;
+    transition-timing-function: ease-in-out;
+
+    transform: scale(101%);
 }
 .desc {
     font-size: 1.5rem;
     font-family: "Black Han Sans";
+}
+
+/* 추천 디테일 페이지 */
+.detail {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 10%;
+    margin-bottom: 30px;
+}
+.detail-desc {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    align-items: center;
+}
+.detail-btns {
+    width: 300px;
+    margin: 10px;
+}
+.del {
+    background-color: #ff5c00;
+}
+.title-desc {
+    font-family: "Black Han Sans";
+    font-size: 2rem;
+    text-align: center;
+    margin-bottom: 10px;
+}
+.title {
+    font-family: "Black Han Sans";
+    font-size: 3rem;
+    text-align: center;
+    margin: 10px auto;
+}
+img {
+    width: 400px;
 }

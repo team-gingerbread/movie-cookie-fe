@@ -3,6 +3,8 @@ import { backend } from "/script/url.js";
 import { getToken } from "/script/token.js";
 console.log("recommend.js 연결");
 const token = await getToken();
+const urlParams = new URLSearchParams(window.location.search);
+const id = urlParams.get("id");
 
 // csv파일에 있는 장르들 리스트
 const genreList = [
@@ -81,6 +83,45 @@ genreList.forEach((genre) => {
     $genres.appendChild(document.createElement("br"));
 });
 
+// 파라미터에 id가 있을경우 -> 기존 정보의 입력 수정후 재추천
+if (token && id) {
+    // 기존 정보를 받아오기 위한 GET요청
+    const editResponse = await fetch(`${backend}recommend/${id}/`, {
+        headers: {
+            Authorization: `Bearer ${token}`,
+            "Content-Type": "application/json",
+        },
+        credentials: "include",
+        method: "GET",
+    });
+
+    if (!editResponse.ok) {
+        const errorData = await editResponse.json();
+        alert(errorData.detail + " 수정이 불가능합니다.");
+        window.location.replace("/recommend/list/");
+    }
+
+    // 입력 항목에 기존 정보들을 채워줌
+    const originRes = await editResponse.json();
+
+    const selectedGenres = originRes.genre;
+    const checkboxes = document.querySelectorAll('input[name="genre"]');
+    checkboxes.forEach(($checkbox) => {
+        if (selectedGenres.includes($checkbox.value)) {
+            $checkbox.checked = true;
+        }
+    });
+
+    document.querySelectorAll('input[name="nation"]').forEach(($checkbox) => {
+        const checkboxName = $checkbox.value === "국내" ? "nation_korean" : "nation_foreign";
+        $checkbox.checked = originRes[checkboxName];
+    });
+
+    document.querySelectorAll('input[name="period"]').forEach(($checkbox) => {
+        $checkbox.checked = originRes[`period_${$checkbox.value}`];
+    });
+}
+
 const $submit = document.querySelector('button[type="submit"]');
 $submit.addEventListener("click", async function (e) {
     e.preventDefault();
@@ -120,17 +161,28 @@ $submit.addEventListener("click", async function (e) {
         window.location.reload();
     }
 
-    // 성공 시 저장 후 상세보기 창으로 넘어감
+    // 성공 시 저장/수정 후 상세보기 창으로 넘어감
+    let url, method;
+    if (id) {
+        // 수정
+        url = `${backend}recommend/${id}/`;
+        method = "PATCH";
+    } else {
+        // 저장
+        url = `${backend}recommend/`;
+        method = "POST";
+    }
+
     const result = await response.json();
     console.log(result);
     if (token) {
-        const response = await fetch(`${backend}recommend/`, {
+        const response = await fetch(url, {
             headers: {
                 Authorization: `Bearer ${token}`,
                 "Content-Type": "application/json",
             },
             credentials: "include",
-            method: "POST",
+            method: method,
             body: JSON.stringify(result),
         });
 
@@ -145,7 +197,9 @@ $submit.addEventListener("click", async function (e) {
         window.location.replace(`/recommend/detail/?db-id=${res.id}`);
     } else {
         result["created_at"] = new Date();
-        localStorage.setItem(localStorage.length + 1, JSON.stringify(result));
-        window.location.replace(`/recommend/detail/?local-id=${localStorage.length}`);
+        let dataSet = JSON.parse(localStorage.getItem("recommend")) || [];
+        dataSet.push(result);
+        localStorage.setItem("recommend", JSON.stringify(dataSet));
+        window.location.replace(`/recommend/detail/?local-id=${dataSet.length - 1}`);
     }
 });

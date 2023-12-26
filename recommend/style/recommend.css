@@ -1,13 +1,14 @@
 /* recommend/style/recommend.css */
+.recommend-head {
+    height: 300px;
+}
+/* 추천입력 페이지 */
 form {
     display: flex;
     flex-direction: column;
     align-items: center;
 }
-.recommend-head {
-    height: 300px;
-}
-.desc {
+.question {
     text-align: center;
     font-size: 2rem;
     margin: 30px auto;
@@ -47,4 +48,28 @@ input[type="checkbox"] {
 .local-btns {
     width: 500px;
     margin: 20px;
+}
+
+/* 추천목록 페이지 */
+table {
+    border-collapse: collapse;
+    width: 90%;
+    text-align: center;
+}
+th {
+    padding: 4px;
+}
+td {
+    padding: 5px;
+}
+.click-tr {
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+.click-tr:hover {
+    background-color: #ffefb5;
+}
+.desc {
+    font-size: 1.5rem;
+    font-family: "Black Han Sans";
 }

@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="ko-KR">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title></title>
+        <link rel="stylesheet" href="/style/base.css" />
+        <link rel="stylesheet" href="/accounts/style/signup.css" />
+    </head>
+
+    <body>
+        <header>
+            <nav>
+                <div onclick="location.href='/'" class="headertitle cookiestyle-light">Movie Cookie</div>
+                <ul>
+                    <a href="/movieinfo/"><li>정보찾기</li></a>
+                    <a href="/community/"><li>커뮤니티</li></a>
+                    <a href="/recommend/"><li>영화추천</li></a>
+                    <!-- 로그인 X -->
+                    <a href="/accounts/login/"><li>로그인</li></a>
+                    <a href="/accounts/signup/"><li>회원가입</li></a>
+                    <!-- 로그인 O -->
+                    <a href="/accounts/mypage/"><li>마이페이지</li></a>
+                    <a href="#" id="logout"><li>로그아웃</li></a>
+                </ul>
+            </nav>
+        </header>
+        <main>
+            <div class="main-content">
+                <div class="content-head">
+                    <!-- 여기에 제목 입력 -->
+                    <div class="content-title cookiestyle-strong">회원가입</div>
+                    <br />
+                </div>
+                <div class="content-body">
+                    <div class="signup-container">
+                        <form class="signup-form" id="signupForm">
+                            <input type="text" id="username" placeholder="아이디" required />
+                            <input type="email" id="email" placeholder="이메일" required />
+                            <input type="password" id="password" placeholder="패스워드" required />
+                            <input type="password" id="password2" placeholder="패스워드 확인" required />
+                            <input type="text" id="nickname" placeholder="닉네임" required />
+                            <input type="text" id="bio" placeholder="소개" />
+                            <button type="submit" class="btn btn-rd cookiestyle-light">회원가입</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </main>
+
+        <footer>
+            <p>Copyright 2023 Team Gingerbread All Rights Reserved.</p>
+        </footer>
+        <script type="module" src="/script/base.js"></script>
+        <script type="module" src="/accounts/script/signup.js"></script>
+    </body>
+</html>

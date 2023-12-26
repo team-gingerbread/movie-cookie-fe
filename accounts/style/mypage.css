@@ -1,0 +1,21 @@
+.profile-container {
+    display: inline-flex;
+    align-items: center;
+    width: 75vh;
+    justify-content: space-between;
+    margin-bottom: 80px;
+}
+.userimg {
+    width: 200px;
+    height: 200px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 2px solid #ddd;
+    background: #eee;
+}
+.movies {
+    height: 300px;
+}
+#profile_edit {
+    margin-bottom: 10px;
+}

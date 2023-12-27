@@ -6,8 +6,6 @@ const frontend_url = new URLSearchParams(window.location.search);
 const search = frontend_url.get("search");
 const search_url = backend + `community/?search=`;
 
-const tableContent = document.getElementById("table-item");
-
 function fetch_posts(apiurl) {
     fetch(apiurl)
         .then((response) => response.json())
@@ -19,23 +17,25 @@ function fetch_posts(apiurl) {
         });
 }
 function render_posts(posts) {
-    tableContent.innerHTML = "";
     posts.forEach((post) => {
-        const newItem = document.createElement("div");
-        newItem.classList.add("item");
+        const $tbody = document.querySelector("tbody");
+        const $tr = document.createElement("tr");
+        const $title = document.createElement("td");
+        $title.innerText = post.title;
+        const $author = document.createElement("td");
+        $author.innerText = post.username;
+        const $date = document.createElement("td");
+        $date.innerText = formatDateString(post.created_at);
 
-        newItem.innerHTML = `
-            <div class="col1">${post.title}</div>
-            <div class="col2">${post.username}</div>
-            <div class="col3">${formatDateString(post.created_at)}</div>
-        `;
-
-        tableContent.appendChild(newItem);
+        $tbody.appendChild($tr);
+        $tr.appendChild($title);
+        $tr.appendChild($author);
+        $tr.appendChild($date);
     });
 }
 
 function formatDateString(dateString) {
-    // datetimefield 형식 변경 함수
+    // datetimefield 형식 변경용
     const date = new Date(dateString);
     return `${date.getFullYear()}/${(date.getMonth() + 1).toString().padStart(2, "0")}/${date.getDate().toString().padStart(2, "0")} ${date
         .getHours()

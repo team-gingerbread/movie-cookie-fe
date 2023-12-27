@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="ko-KR">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>글쓰기 페이지</title>
+        <link rel="stylesheet" href="../../style/base.css" />
+        <link rel="stylesheet" href="../style/style.css" />
+    </head>
+    <body>
+        <header>
+            <nav>
+                <div onclick="location.href='/'" class="headertitle cookiestyle-light">Movie Cookie</div>
+                <ul>
+                    <a href="/movieinfo/"><li>정보찾기</li></a>
+                    <a href="/community/"><li>커뮤니티</li></a>
+                    <a href="/recommend/"><li>영화추천</li></a>
+                    <!-- 로그인 X -->
+                    <a href="/accounts/login/"><li>로그인</li></a>
+                    <a href="/accounts/signup/"><li>회원가입</li></a>
+                    <!-- 로그인 O -->
+                    <a href="/accounts/mypage/"><li>마이페이지</li></a>
+                    <a href="#" id="logout"><li>로그아웃</li></a>
+                </ul>
+            </nav>
+        </header>
+        <main>
+            <form id="write_form">
+                <label for="title">제목</label>
+                <input type="text" id="title" name="title" />
+
+                <label for="content">내용</label>
+                <textarea id="content" name="content" rows="18"></textarea>
+
+                <input type="file" id="image" />
+            </form>
+            <div class="btn-box">
+                <button type="submit" class="btn cookiestyle-light" id="write_btn">글쓰기</button>
+                <button type="submit" class="btn cookiestyle-light" id="postlist_btn" onclick="location.href='..';">글목록</button>
+            </div>
+        </main>
+        <script type="module" src="../script/write.js"></script>
+        <script type="module" src="../../script/base.js"></script>
+    </body>
+</html>

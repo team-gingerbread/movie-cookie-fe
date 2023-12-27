@@ -5,8 +5,12 @@ const frontend_url = new URLSearchParams(window.location.search);
 const search = frontend_url.get("search");
 
 const $search_btn = document.getElementById("search_btn");
-const data = { query: search };
+$search_btn.addEventListener("click", (e) => {
+	const $search = document.getElementById("search");
+	localStorage.setItem("search", $search.value);
+});
 
+const data = { query: search };
 if (search) {
 	fetch(backend_url, {
 		method: "POST",

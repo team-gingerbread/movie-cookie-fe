@@ -4,7 +4,7 @@
 		<meta charset="UTF-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 		<title></title>
-		<link rel="stylesheet" href="/base/base.css" />
+		<link rel="stylesheet" href="/style/base.css" />
 		<link rel="stylesheet" href="/movieinfo/style/style.css" />
 	</head>
 
@@ -28,10 +28,15 @@
 		<main>
 			<div class="main-content">
 				<div class="content-head movieinfo-content-head">
-					<div><button onclick="history.back()" class="cookiestyle-medium util btn"><< 뒤로가기</button></div>
+					<div><button class="cookiestyle-medium util btn" id="back-btn"><< 뒤로가기</button></div>
 					<div class="content-title cookiestyle-medium" id="movie-title"></div>
 					<br />
 					<div class="movieinfo-area" id="movieinfo-area"></div>
+					<div class="lww-area">
+						<button class="lww btn cookiestyle-light" id="like">♥ 좋아요</button>
+						<button class="lww btn cookiestyle-light" id="watched">본 영화에요</button>
+						<button class="lww btn cookiestyle-light" id="watchlist">볼 영화에요</button>
+					</div>
 				</div>
 				<div class="bar"></div>
 				<div class="content-body movieinfo-content-body">
@@ -40,6 +45,40 @@
 					<div class="content-title cookiestyle-light" id="item-title">줄거리</div>
 					<div id="plot"></div>
 					<div class="content-title cookiestyle-light" id="item-title">한줄평</div>
+					<div>
+						<div id="onelinecritic-list"></div>
+						<form method="post" class="search-area" id="onelinecritic-form">
+							<input
+								type="text"
+								class="searchbar cookiestyle-light"
+								placeholder="이 영화의 한줄평을 입력하세요"
+								id="search"
+								name="search" />
+							<ul class="starpoint-ul">
+								<li>
+									<input type="radio" id="starpoint1" name="starpoint" value="1" />
+									<label for="starpoint1">★</label>
+								</li>
+								<li>
+									<input type="radio" id="starpoint2" name="starpoint" value="2" />
+									<label for="starpoint2">★</label>
+								</li>
+								<li>
+									<input type="radio" id="starpoint3" name="starpoint" value="3" />
+									<label for="starpoint3">★</label>
+								</li>
+								<li>
+									<input type="radio" id="starpoint4" name="starpoint" value="4" />
+									<label for="starpoint4">★</label>
+								</li>
+								<li>
+									<input type="radio" id="starpoint5" name="starpoint" value="5" />
+									<label for="starpoint5">★</label>
+								</li>
+							</ul>
+							<input type="button" class="btn cookiestyle-light" value="입력" id="onelinecritic-btn" />
+						</form>
+					</div>
 				</div>
 			</div>
 		</main>
@@ -47,6 +86,9 @@
 		<footer>
 			<p>Copyright 2023 Team Gingerbread All Rights Reserved.</p>
 		</footer>
+		<script type="module" src="/script/base.js"></script>
+		<script type="module" src="/script/token.js"></script>
+		<script type="module" src="/script/url.js"></script>
 		<script type="module" src="../script/detail.js"></script>
 	</body>
 </html>

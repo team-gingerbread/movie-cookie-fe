@@ -6,5 +6,6 @@
     "editor.defaultFormatter": "esbenp.prettier-vscode",
     "editor.formatOnSave": true,
     "prettier.printWidth": 150,
-    "prettier.bracketSameLine": true
+    "prettier.bracketSameLine": true,
+    "liveServer.settings.port": 5501
 }

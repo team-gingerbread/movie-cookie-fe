@@ -6,10 +6,9 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <title>Movie Cookie</title>
         <link rel="stylesheet" href="/style/base.css" />
-        <link rel="stylesheet" href="/style/main.css" />
+        <link rel="stylesheet" href="/accounts/style/login.css" />
     </head>
     <body>
-        <div class="bg"></div>
         <header>
             <nav>
                 <div onclick="location.href='/'" class="headertitle cookiestyle-light">Movie Cookie</div>
@@ -27,22 +26,30 @@
             </nav>
         </header>
         <main>
-            <div class="main-content main-page">
-                <div class="content-head main-head">
-                    <div class="content-title cookiestyle-strong title">Movie Cookie</div>
-                </div>
-                <div class="search-box">
-                    <p class="desc">영화 정보가 궁금하신가요?</p>
-                    <form method="get" action="/movieinfo/" class="search-area">
-                        <input type="text" class="searchbar cookiestyle-light" placeholder="검색할 영화 제목을 입력하세요" name="search" />
-                        <input type="submit" class="btn cookiestyle-light" value="입력" />
+            <div class="content-head">
+                <!-- 여기에 제목 입력 -->
+                <div class="content-title cookiestyle-strong">로그인</div>
+                <br />
+            </div>
+            <div class="content-body">
+                <div class="login-container">
+                    <form class="login-form" id="loginForm">
+                        <input type="text" id="username" placeholder="아이디" required />
+                        <input type="password" id="password" placeholder="패스워드" required />
+                        <button type="submit" class="btn btn-rd cookiestyle-light">로그인</button>
                     </form>
+                    <div class="signup">
+                        <p>계정이 없으신가요?</p>
+                        <a href="/accounts/signup/index.html">회원가입</a>
+                    </div>
                 </div>
             </div>
         </main>
+
         <footer>
             <p>Copyright 2023 Team Gingerbread All Rights Reserved.</p>
         </footer>
         <script type="module" src="/script/base.js"></script>
+        <script type="module" src="/accounts/script/login.js"></script>
     </body>
 </html>

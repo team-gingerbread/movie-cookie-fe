@@ -7,8 +7,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <title>Movie Cookie</title>
         <link rel="stylesheet" href="/style/base.css" />
-		<link rel="stylesheet" href="/recommend/style/detail.css" />
-    </head>
+        <link rel="stylesheet" href="/recommend/style/recommend.css" />
     </head>
     <body>
         <header>
@@ -28,12 +27,27 @@
             </nav>
         </header>
         <main>
-            <h1>추천 상세 정보</h1>
+            <div class="main-content">
+                <div class="content-head recommend-head">
+                    <div class="content-title cookiestyle-strong">영화 추천</div>
+                </div>
+                <div class="detail">
+                    <img alt="포스터" class="cookiestyle-medium" id="poster" />
+                    <div class="detail-desc">
+                        <p class="title-desc">이 영화를 추천합니다!</p>
+                        <div class="title"></div>
+                        <button type="button" class="btn cookiestyle-light detail-btns" id="movieinfo">상세정보 보러가기</button>
+                        <button type="button" class="btn cookiestyle-light detail-btns" onclick="location.href='/recommend/list/'">목록보기</button>
+                        <button type="button" class="btn cookiestyle-light detail-btns" id="btn1"></button>
+                        <button type="button" class="btn cookiestyle-light detail-btns del" id="btn2"></button>
+                    </div>
+                </div>
+            </div>
         </main>
         <footer>
             <p>Copyright 2023 Team Gingerbread All Rights Reserved.</p>
         </footer>
         <script type="module" src="/script/base.js"></script>
-		<script type="module" src="/recommend/script/detail.js"></script>
+        <script type="module" src="/recommend/script/detail.js"></script>
     </body>
 </html>

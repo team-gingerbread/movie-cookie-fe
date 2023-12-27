@@ -1,0 +1,27 @@
+.signup-container {
+    width: max(800px, 33%);
+    height: max(800px, 33%);
+    padding: 20px;
+    background: #fff;
+    border: 1px solid #dbdbdb;
+    border-radius: 5px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+.signup-form {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+.signup-form input:not(#profileImage) {
+    height: 50px;
+    padding: 8px;
+    border: 1px solid #dbdbdb;
+    border-radius: 4px;
+    margin-bottom: 15px;
+}
+
+.signup-form button {
+    margin: 30px auto 0 auto;
+}

@@ -63,11 +63,21 @@ header {
 }
 
 header nav {
+<<<<<<< HEAD
 	width: 70%;
 	display: flex;
 	flex-direction: row;
 	justify-content: space-between;
 	align-items: center;
+=======
+    width: 70%;
+    min-width: 400px;
+    max-width: 1000px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+>>>>>>> 7ec70b6ef14c41fb1fb9413ae3ca5ce2b63c7ade
 }
 
 header nav ul {
@@ -201,12 +211,23 @@ main {
 }
 
 .main-content {
+<<<<<<< HEAD
 	width: 70%;
 	display: flex;
 	flex-direction: column;
 	justify-content: flex-start;
 	align-items: center;
 	margin-bottom: 30px;
+=======
+    width: 70%;
+    min-width: 400px;
+    max-width: 1000px;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    margin-bottom: 30px;
+>>>>>>> 7ec70b6ef14c41fb1fb9413ae3ca5ce2b63c7ade
 }
 
 .content-head {
@@ -232,6 +253,7 @@ main {
 }
 
 .content-body {
+<<<<<<< HEAD
 	width: 100%;
 	min-height: 1000px;
 
@@ -240,6 +262,14 @@ main {
 	flex-grow: 2;
 	justify-content: flex-start;
 	align-items: center;
+=======
+    width: 100%;
+    height: 1000px;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+>>>>>>> 7ec70b6ef14c41fb1fb9413ae3ca5ce2b63c7ade
 }
 
 /* 본문(content) 영역 시작 ---- */

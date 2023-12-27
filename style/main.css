@@ -1,0 +1,33 @@
+/* 메인페이지 CSS */
+body {
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+.bg {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background-image: url(../img/background.jpg);
+    background-position: center center;
+    background-size: cover;
+    opacity: 0.3;
+    z-index: -1;
+}
+main {
+    flex: 1;
+}
+.main-page {
+    gap: 70%;
+    justify-content: center;
+}
+.main-head {
+    height: 100%;
+}
+.title {
+    width: 500px;
+}
+.desc {
+    font-size: 3rem;
+    font-family: "Black Han Sans";
+}

@@ -1,0 +1,36 @@
+.login-container {
+    width: max(500px, 33%);
+    height: max(300px, 33%);
+    padding: 20px;
+    background: #fff;
+    border: 1px solid #dbdbdb;
+    border-radius: 5px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+.login-form {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+.login-form input {
+    height: 50px;
+    padding: 8px;
+    border: 1px solid #dbdbdb;
+    border-radius: 4px;
+    margin-bottom: 15px;
+}
+
+.login-form button {
+    margin: 10px auto;
+}
+
+.signup {
+    text-align: center;
+    margin-top: 10px;
+}
+.signup a {
+    text-decoration: none;
+    color: #0095f6;
+}

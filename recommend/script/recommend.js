@@ -7,60 +7,21 @@ const urlParams = new URLSearchParams(window.location.search);
 const id = urlParams.get("id");
 
 // csv파일에 있는 장르들 리스트
-const genreList = [
-    "SF",
-    "가족",
-    "갱스터",
-    "공포",
-    "공포(호러)",
-    "교육",
-    "군사",
-    "기업ㆍ기관ㆍ단체",
-    "느와르",
-    "동성애",
-    "드라마",
-    "로드무비",
-    "멜로/로맨스",
-    "멜로드라마",
-    "모험",
-    "무협",
-    "문화",
-    "뮤지컬",
-    "뮤직",
-    "미스터리",
-    "반공/분단",
-    "범죄",
-    "사회",
-    "사회물(경향)",
-    "서부",
-    "스릴러",
-    "스포츠",
-    "시대극/사극",
-    "신파",
-    "실험",
-    "아동",
-    "애니메이션",
-    "액션",
-    "어드벤처",
-    "역사",
-    "옴니버스",
-    "인권",
-    "인물",
-    "자연ㆍ환경",
-    "재난",
-    "전기",
-    "전쟁",
-    "종교",
-    "지역",
-    "첩보",
-    "청춘영화",
-    "코메디",
-    "판타지",
-    "하이틴(고교)",
-    "합작(번안물)",
-    "해양액션",
-    "활극",
-];
+const response = await fetch(`${backend}recommend/genres/`, {
+    headers: {
+        "Content-Type": "application/json",
+    },
+    credentials: "include",
+    method: "GET",
+});
+
+if (!response.ok) {
+    const errorData = await response.json();
+    alert(errorData.detail);
+    window.location.replace("/");
+}
+
+const genreList = await response.json();
 
 // HTML에 장르 체크박스 추가
 const $genres = document.querySelector("#genres");

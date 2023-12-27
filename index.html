@@ -6,8 +6,10 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <title>Movie Cookie</title>
         <link rel="stylesheet" href="/style/base.css" />
+        <link rel="stylesheet" href="/style/main.css" />
     </head>
     <body>
+        <div class="bg"></div>
         <header>
             <nav>
                 <div onclick="location.href='/'" class="headertitle cookiestyle-light">Movie Cookie</div>
@@ -25,7 +27,18 @@
             </nav>
         </header>
         <main>
-            <!-- 메인 페이지 내용 구현 -->
+            <div class="main-content main-page">
+                <div class="content-head main-head">
+                    <div class="content-title cookiestyle-strong title">Movie Cookie</div>
+                </div>
+                <div class="search-box">
+                    <p class="desc">영화 정보가 궁금하신가요?</p>
+                    <form method="get" action="/movieinfo/" class="search-area">
+                        <input type="text" class="searchbar cookiestyle-light" placeholder="검색할 영화 제목을 입력하세요" name="search" />
+                        <input type="submit" class="btn cookiestyle-light" value="입력" />
+                    </form>
+                </div>
+            </div>
         </main>
         <footer>
             <p>Copyright 2023 Team Gingerbread All Rights Reserved.</p>

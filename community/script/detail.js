@@ -82,7 +82,7 @@ document.getElementById("comment_btn").addEventListener("click", async function 
         window.location.href = "/accounts/login/index.html";
         return;
     }
-    const content = document.getElementById("content").value;
+    const content = document.getElementById("comment_content").value;
     const formdata = new FormData();
     formdata.append("post", postid);
     formdata.append("content", content);

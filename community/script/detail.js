@@ -9,6 +9,9 @@ const commentposturl = backend + `community/comments/`;
 
 const commentsurl = backend + `community/view/comments/${postid}/`;
 const commentcontainer = document.querySelector(".comments-container");
+
+let postauthorid;
+
 document.addEventListener("DOMContentLoaded", function () {
     // 페이지 로딩 시 포스트와 댓글 렌더링
 
@@ -39,6 +42,7 @@ function renderpost(post) {
         postimageelement.src = post.image;
         postcontainer.appendChild(postimageelement);
     }
+    postauthorid = post.user;
 }
 
 function rendercomments(comments) {
@@ -71,6 +75,19 @@ function formatdatestring(dateString) {
         .getHours()
         .toString()
         .padStart(2, "0")}:${date.getMinutes().toString().padStart(2, "0")}:${date.getSeconds().toString().padStart(2, "0")}`;
+}
+
+// 토큰에서 사용자 ID 추출하는 함수
+function getUserIdFromToken(token) {
+    try {
+        const base64Url = token.split(".")[1];
+        const base64 = base64Url.replace(/-/g, "+").replace(/_/g, "/");
+        const payload = JSON.parse(atob(base64));
+        return payload.user_id; // 토큰의 payload에서 user_id 필드 추출
+    } catch (error) {
+        console.error("토큰 분석 중 오류:", error);
+        return null;
+    }
 }
 
 document.getElementById("comment_btn").addEventListener("click", async function (event) {
@@ -107,4 +124,46 @@ document.getElementById("comment_btn").addEventListener("click", async function 
             console.error("Error:", error);
             alert("write failed");
         });
+});
+document.getElementById("postdelete_btn").addEventListener("click", async function (event) {
+    event.preventDefault();
+    const accessToken = await getToken();
+    const userId = getUserIdFromToken(accessToken);
+
+    if (userId !== postauthorid) {
+        alert("자신의 게시글만 삭제할 수 있습니다.");
+        window.location.href = "..";
+        return;
+    }
+
+    fetch(backendurl, {
+        method: "DELETE",
+        headers: {
+            Authorization: "Bearer " + accessToken,
+        },
+    })
+        .then((response) => {
+            if (!response.ok) {
+                alert("DELETE failed...");
+            } else {
+                window.location.href = "..";
+            }
+        })
+        .then(() => {})
+        .catch((error) => {
+            console.error("Error:", error);
+            alert("DELETE failed");
+        });
+});
+document.getElementById("postmodify_btn").addEventListener("click", async function (event) {
+    event.preventDefault();
+    const accessToken = await getToken();
+    const userId = getUserIdFromToken(accessToken);
+
+    if (userId !== postauthorid) {
+        alert("자신의 게시글만 수정할 수 있습니다.");
+        window.location.href = "..";
+        return;
+    }
+    window.location.href = `../write/index.html?postid=${postid}`;
 });

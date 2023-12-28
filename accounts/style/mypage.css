@@ -1,5 +1,5 @@
 .content-body {
-    height: 1300px;
+    height: 1500px;
 }
 .profile-container {
     display: inline-flex;
@@ -46,11 +46,11 @@
 
 .movie-poster {
     width: 100%;
-    height: auto;
-    max-height: 300px;
+    height: 300px;
 }
+
 .movie-box {
-    height: 900px;
+    height: 1100px;
 }
 
 #liked-movies-container {

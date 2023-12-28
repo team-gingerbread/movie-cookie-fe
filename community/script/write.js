@@ -17,8 +17,9 @@ document.getElementById("write_btn").addEventListener("click", function (event) 
     const formdata = new FormData();
     formdata.append("title", title);
     formdata.append("content", content);
-    formdata.append("image", image);
-
+    if (image) {
+        formdata.append("image", image);
+    }
     fetch(backend_url, {
         method: "POST",
         headers: {
@@ -26,14 +27,15 @@ document.getElementById("write_btn").addEventListener("click", function (event) 
         },
         body: formdata,
     })
-        .then((response) => response.json())
-        .then((data) => {
-            if (data.id) {
-                window.location.href = "..";
-            } else {
+        .then((response) => {
+            if (!response.ok) {
                 alert("write failed...");
+            } else {
+                window.location.href = "..";
             }
+            return response.json();
         })
+        .then(() => {})
         .catch((error) => {
             console.error("Error:", error);
             alert("write failed");

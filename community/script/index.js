@@ -21,11 +21,17 @@ function render_posts(posts) {
         const $tbody = document.querySelector("tbody");
         const $tr = document.createElement("tr");
         const $title = document.createElement("td");
-        $title.innerText = post.title;
+
+        const $link = document.createElement("a");
+        $link.innerText = post.title;
+        $link.href = `detail/index.html?postid=${post.id}`;
+
+        $title.appendChild($link);
+
         const $author = document.createElement("td");
         $author.innerText = post.username;
         const $date = document.createElement("td");
-        $date.innerText = formatDateString(post.created_at);
+        $date.innerText = formatdatestring(post.created_at);
 
         $tbody.appendChild($tr);
         $tr.appendChild($title);
@@ -34,8 +40,7 @@ function render_posts(posts) {
     });
 }
 
-function formatDateString(dateString) {
-    // datetimefield 형식 변경용
+function formatdatestring(dateString) {
     const date = new Date(dateString);
     return `${date.getFullYear()}/${(date.getMonth() + 1).toString().padStart(2, "0")}/${date.getDate().toString().padStart(2, "0")} ${date
         .getHours()
@@ -45,8 +50,8 @@ function formatDateString(dateString) {
 
 document.addEventListener("DOMContentLoaded", function () {
     if (search) {
-        const searchApiUrl = search_url + search;
-        fetch_posts(searchApiUrl);
+        const search_api_url = search_url + search;
+        fetch_posts(search_api_url);
     } else {
         fetch_posts(backend_url);
     }

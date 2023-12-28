@@ -29,7 +29,7 @@ textarea {
     width: 70%;
     padding: 8px;
 }
-label {
+.write_label {
     display: block;
     margin: 5px;
     font-family: "Black Han Sans";
@@ -38,4 +38,22 @@ label {
 }
 input {
     display: block;
+}
+.recomment {
+    margin-left: 5px;
+    gap: 5px;
+}
+#comment_btn {
+    width: 80px;
+    display: inline;
+}
+.comment_label {
+    display: inline;
+    font-family: "Black Han Sans";
+    font-weight: 500;
+    font-size: 20px;
+}
+.comment_content {
+    inherits: none;
+    display: inline;
 }

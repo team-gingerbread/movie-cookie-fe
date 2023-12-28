@@ -1,0 +1,59 @@
+.btn-box {
+    width: 70%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: 30px;
+}
+
+table {
+    margin: 10px;
+    border-collapse: collapse;
+    width: 90%;
+    text-align: center;
+}
+th {
+    padding: 4px;
+}
+tr {
+    border-bottom: 2px solid #e9e9e9;
+    height: 38px;
+}
+td {
+    padding: 5px;
+}
+input[type="text"],
+form,
+textarea {
+    align-items: center;
+    width: 70%;
+    padding: 8px;
+}
+.write_label {
+    display: block;
+    margin: 5px;
+    font-family: "Black Han Sans";
+    font-weight: 500;
+    font-size: 20px;
+}
+input {
+    display: block;
+}
+.recomment {
+    margin-left: 5px;
+    gap: 5px;
+}
+#comment_btn {
+    width: 80px;
+    display: inline;
+}
+.comment_label {
+    display: inline;
+    font-family: "Black Han Sans";
+    font-weight: 500;
+    font-size: 20px;
+}
+.comment_content {
+    inherits: none;
+    display: inline;
+}

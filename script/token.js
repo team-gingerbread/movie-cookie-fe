@@ -33,7 +33,9 @@ async function refreshToken() {
 
     const data = await response.json();
     if (!response.ok) {
-        return null; // 재발급 실패 시 null 리턴
+        localStorage.removeItem("access");
+        localStorage.removeItem("refresh");
+        return null; // 재발급 실패 시 토큰 지우고 null 리턴
     }
 
     // 성공 시 로컬스토리지에 access token 새로 저장 후 값 리턴

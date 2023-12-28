@@ -1,0 +1,70 @@
+.content-body {
+    height: 1300px;
+}
+.profile-container {
+    display: inline-flex;
+    align-items: center;
+    width: 75vh;
+    justify-content: space-between;
+    margin-bottom: 80px;
+}
+
+.userimg {
+    width: 200px;
+    height: 200px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 2px solid #ddd;
+    background: #eee;
+}
+
+.profile-info {
+    text-align: center;
+    font-family: "Black Han Sans";
+    font-weight: 500;
+}
+
+.movies {
+    height: 300px;
+}
+
+#profile_edit {
+    margin-bottom: 10px;
+}
+
+.movie-list-title {
+    font-family: "Black Han Sans";
+    font-weight: 500;
+}
+
+.movie-grid {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 20px;
+}
+
+.movie-poster {
+    width: 100%;
+    height: auto;
+    max-height: 300px;
+}
+.movie-box {
+    height: 900px;
+}
+
+#liked-movies-container {
+    height: 350px;
+}
+
+#watched-movies-container {
+    height: 350px;
+}
+
+#watchlist-movies-container {
+    height: 350px;
+}
+
+.btn {
+    margin-bottom: 10px;
+}

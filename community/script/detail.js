@@ -1,4 +1,5 @@
 import { backend } from "/script/url.js";
+import { getToken } from "/script/token.js";
 
 // 현재 URL에서 post_id 추출
 
@@ -72,9 +73,9 @@ function formatdatestring(dateString) {
         .padStart(2, "0")}:${date.getMinutes().toString().padStart(2, "0")}:${date.getSeconds().toString().padStart(2, "0")}`;
 }
 
-document.getElementById("comment_btn").addEventListener("click", function (event) {
+document.getElementById("comment_btn").addEventListener("click", async function (event) {
     event.preventDefault();
-    const accessToken = localStorage.getItem("access");
+    const accessToken = await getToken();
 
     if (!accessToken) {
         alert("로그인이 필요합니다.");

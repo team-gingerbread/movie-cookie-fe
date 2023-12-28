@@ -1,10 +1,11 @@
 import { backend } from "/script/url.js";
+import { getToken } from "/script/token.js";
 
 const backend_url = backend + `community/`;
 
-document.getElementById("write_btn").addEventListener("click", function (event) {
+document.getElementById("write_btn").addEventListener("click", async function (event) {
     event.preventDefault();
-    const accessToken = localStorage.getItem("access");
+    const accessToken = await getToken();
 
     if (!accessToken) {
         alert("로그인이 필요합니다.");

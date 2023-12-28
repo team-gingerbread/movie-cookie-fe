@@ -95,6 +95,7 @@ async function fetchUserProfile() {
 
     try {
         const response = await fetch(`${backend}accounts/api/user-profile/${getUserIdFromToken(accessToken)}`, {
+            method: "GET",
             headers: {
                 Authorization: "Bearer " + accessToken,
             },

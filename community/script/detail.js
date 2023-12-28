@@ -324,6 +324,11 @@ async function submitRecomment(parentCommentId, content) {
 }
 async function modifycomment(CommentId, content) {
     const accessToken = await getToken();
+    if (!accessToken) {
+        alert("로그인이 필요합니다.");
+        window.location.href = "/accounts/login/index.html";
+        return;
+    }
     const submiturl = commentposturl + `${CommentId}/`;
     const commentsResponse = await fetch(submiturl, {
         method: "GET",
@@ -364,7 +369,7 @@ async function modifycomment(CommentId, content) {
     })
         .then((response) => {
             if (!response.ok) {
-                alert("대댓글 수정 실패...");
+                alert("댓글 수정 실패...");
             } else {
                 window.location.reload();
             }
@@ -373,11 +378,16 @@ async function modifycomment(CommentId, content) {
         .then(() => {})
         .catch((error) => {
             console.error("Error:", error);
-            alert("대댓글 수정 실패");
+            alert("댓글 수정 실패");
         });
 }
 async function deletecomment(commentid) {
     const accessToken = await getToken();
+    if (!accessToken) {
+        alert("로그인이 필요합니다.");
+        window.location.href = "/accounts/login/index.html";
+        return;
+    }
     const submiturl = commentposturl + `${commentid}/`;
 
     const commentsResponse = await fetch(submiturl, {

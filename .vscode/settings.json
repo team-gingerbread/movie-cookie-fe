@@ -1,10 +1,11 @@
 {
-    "[python]": {
-        "editor.defaultFormatter": "ms-python.black-formatter",
-        "editor.formatOnSave": true
-    },
-    "editor.defaultFormatter": "esbenp.prettier-vscode",
-    "editor.formatOnSave": true,
-    "prettier.printWidth": 150,
-    "prettier.bracketSameLine": true
+	"[python]": {
+		"editor.defaultFormatter": "ms-python.black-formatter",
+		"editor.formatOnSave": true
+	},
+	"editor.defaultFormatter": "esbenp.prettier-vscode",
+	"editor.formatOnSave": true,
+	"prettier.printWidth": 150,
+	"prettier.bracketSameLine": true,
+	"liveServer.settings.port": 5501
 }

@@ -44,7 +44,8 @@ input {
     gap: 5px;
 }
 #comment_btn {
-    width: 80px;
+    width: 40px;
+    height: 30px;
     display: inline;
 }
 .comment_label {
@@ -56,4 +57,35 @@ input {
 .comment_content {
     inherits: none;
     display: inline;
+}
+.post-detail-container {
+    margin: 20px;
+    width: 80%;
+}
+.comments-container {
+    width: 80%;
+}
+.content-body {
+    height: 80%;
+    gap: 30px;
+}
+#comment-modify-btn,
+#comment-delete-btn,
+#comment-recomment-btn {
+    display: inline;
+    width: 40px;
+    height: 25px;
+    font-size: small;
+    margin-left: 8px;
+}
+.commentbox {
+    display: flex;
+
+    margin-left: 8px;
+    font-size: large;
+}
+.recomment-window {
+    display: block; /* 또는 다른 원하는 값 */
+
+    /* 다른 스타일 속성 추가 */
 }

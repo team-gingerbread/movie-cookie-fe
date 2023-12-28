@@ -4,8 +4,6 @@ import { getToken } from "/script/token.js";
 const postid = new URLSearchParams(window.location.search).get("postid");
 const backend_url = backend + `community/`;
 const backendurl = backend + `community/${postid}/`;
-const fileInput = document.getElementById("image");
-const fileNameSpan = document.getElementById("filename");
 
 document.addEventListener("DOMContentLoaded", function () {
     const urlParams = new URLSearchParams(window.location.search);

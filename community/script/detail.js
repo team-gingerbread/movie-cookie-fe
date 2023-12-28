@@ -31,7 +31,7 @@ function renderpost(post) {
     const posttitleelement = document.querySelector(".post-title");
     const postauthorelement = document.querySelector(".post-author");
     const postdateelement = document.querySelector(".post-date");
-    const postcontentelement = document.querySelector(".post-content textarea");
+    const postcontentelement = document.querySelector(".post-content");
 
     posttitleelement.textContent = post.title;
     postauthorelement.textContent = `작성자: ${post.username}`;
@@ -46,29 +46,34 @@ function renderpost(post) {
 }
 
 function rendercomments(comments) {
-    const x = comments.parent_comments;
-    x.forEach((element) => {
+    comments.parent_comments.forEach((element) => {
+        const commentbox = document.createElement("div");
+        commentbox.setAttribute("class", "commentbox");
         const comment = document.createElement("div");
-        comment.textContent = `${element.username} : ${element.content}         ${formatdatestring(element.created_at)}`;
-        commentcontainer.appendChild(comment);
-        if (element.reply) {
-            renderreply(element.reply, 1);
-        }
+        comment.setAttribute("id", `${element.id}`);
+        comment.textContent = `${element.username} : ${element.content} ${formatdatestring(element.created_at)}`;
+        commentbox.appendChild(comment);
+        addcommentbutton(commentbox, element.id);
+        commentcontainer.appendChild(commentbox);
+        renderreply(element.reply, 1);
     });
 }
-function renderreply(comments, count) {
-    comments.forEach((element) => {
+
+function renderreply(replies, count) {
+    replies.forEach((element) => {
         const recomment = document.createElement("div");
         recomment.classList.add("recomment");
-
-        recomment.textContent = `ㄴ`.repeat(count) + `${element.username} : ${element.content}         ${formatdatestring(element.created_at)}`;
+        recomment.setAttribute("id", `${element.id}`);
+        recomment.textContent = `ㄴ`.repeat(count) + `${element.username} : ${element.content} ${formatdatestring(element.created_at)}`;
         commentcontainer.appendChild(recomment);
+        addcommentbutton(recomment, element.id);
+        // Recursive call for nested replies
         if (element.reply) {
-            count = count + 1;
-            renderreply(element.reply, count);
+            renderreply(element.reply, count + 1);
         }
     });
 }
+
 function formatdatestring(dateString) {
     const date = new Date(dateString);
     return `${date.getFullYear()}/${(date.getMonth() + 1).toString().padStart(2, "0")}/${date.getDate().toString().padStart(2, "0")} ${date
@@ -167,3 +172,255 @@ document.getElementById("postmodify_btn").addEventListener("click", async functi
     }
     window.location.href = `../write/index.html?postid=${postid}`;
 });
+
+function addcommentbutton(div, commentid) {
+    const modifybutton = document.createElement("button");
+    const deletebutton = document.createElement("button");
+    const recommentbutton = document.createElement("button");
+
+    modifybutton.setAttribute("type", "submit");
+    modifybutton.setAttribute("id", "comment-modify-btn");
+    modifybutton.setAttribute("class", "btn cookiestyle-light");
+
+    deletebutton.setAttribute("type", "submit");
+    deletebutton.setAttribute("id", "comment-delete-btn");
+    deletebutton.setAttribute("class", "btn cookiestyle-light");
+
+    recommentbutton.setAttribute("type", "submit");
+    recommentbutton.setAttribute("id", "comment-recomment-btn");
+    recommentbutton.setAttribute("class", "btn cookiestyle-light");
+
+    modifybutton.textContent = "수정";
+    deletebutton.textContent = "삭제";
+    recommentbutton.textContent = "대댓글";
+
+    modifybutton.addEventListener("click", async function (event) {
+        event.preventDefault();
+        if (!isRecommentWindowOpen(commentid)) {
+            modifycommentwindow(commentid);
+        }
+    });
+    deletebutton.addEventListener("click", function (event) {
+        event.preventDefault();
+        deletecomment(commentid);
+    });
+    recommentbutton.addEventListener("click", function (event) {
+        event.preventDefault();
+        if (!isRecommentWindowOpen(commentid)) {
+            makerecommentwindow(commentid);
+        }
+    });
+    div.append(modifybutton);
+    div.append(deletebutton);
+    div.append(recommentbutton);
+}
+
+function makerecommentwindow(parentCommentId) {
+    const parentCommentElement = document.getElementById(parentCommentId);
+    const recommentWindow = document.createElement("div");
+    recommentWindow.classList.add("recomment-window");
+
+    const input = document.createElement("input");
+    input.setAttribute("type", "text");
+    input.setAttribute("placeholder", "내용을 작성하세요");
+    recommentWindow.appendChild(input);
+
+    const submitButton = document.createElement("button");
+    submitButton.setAttribute("type", "button");
+    submitButton.textContent = "작성";
+    submitButton.addEventListener("click", function () {
+        const content = input.value;
+        if (content.trim() !== "") {
+            submitRecomment(parentCommentId, content);
+            recommentWindow.remove();
+        } else {
+            alert("내용을 입력하세요.");
+        }
+    });
+    recommentWindow.appendChild(submitButton);
+    const cancelButton = document.createElement("button");
+    cancelButton.setAttribute("type", "button");
+    cancelButton.textContent = "취소";
+    cancelButton.addEventListener("click", function () {
+        recommentWindow.remove();
+    });
+    recommentWindow.appendChild(cancelButton);
+
+    parentCommentElement.appendChild(recommentWindow);
+}
+function modifycommentwindow(parentCommentId) {
+    const parentCommentElement = document.getElementById(parentCommentId);
+    const recommentWindow = document.createElement("div");
+    recommentWindow.classList.add("recomment-window");
+
+    const input = document.createElement("input");
+    input.setAttribute("type", "text");
+    input.setAttribute("placeholder", "내용을 작성하세요");
+    recommentWindow.appendChild(input);
+
+    const submitButton = document.createElement("button");
+    submitButton.setAttribute("type", "button");
+    submitButton.textContent = "수정";
+    submitButton.addEventListener("click", function () {
+        const content = input.value;
+        if (content.trim() !== "") {
+            modifycomment(parentCommentId, content);
+            recommentWindow.remove();
+        } else {
+            alert("내용을 입력하세요.");
+        }
+    });
+    recommentWindow.appendChild(submitButton);
+    const cancelButton = document.createElement("button");
+    cancelButton.setAttribute("type", "button");
+    cancelButton.textContent = "취소";
+    cancelButton.addEventListener("click", function () {
+        recommentWindow.remove();
+    });
+    recommentWindow.appendChild(cancelButton);
+
+    parentCommentElement.appendChild(recommentWindow);
+}
+
+function isRecommentWindowOpen(parentCommentId) {
+    const parentCommentElement = document.getElementById(parentCommentId);
+    return parentCommentElement.querySelector(".recomment-window") !== null;
+}
+async function submitRecomment(parentCommentId, content) {
+    const accessToken = await getToken();
+
+    if (!accessToken) {
+        alert("로그인이 필요합니다.");
+        window.location.href = "/accounts/login/index.html";
+        return;
+    }
+    const submiturl = commentposturl;
+
+    const formdata = new FormData();
+    formdata.append("post", postid);
+    formdata.append("parent", parentCommentId);
+    formdata.append("content", content);
+
+    fetch(submiturl, {
+        method: "POST",
+        headers: {
+            Authorization: "Bearer " + accessToken,
+        },
+        body: formdata,
+    })
+        .then((response) => {
+            if (!response.ok) {
+                alert("대댓글 작성 실패...");
+            } else {
+                window.location.reload();
+            }
+            return response.json();
+        })
+        .then(() => {})
+        .catch((error) => {
+            console.error("Error:", error);
+            alert("대댓글 작성 실패");
+        });
+}
+async function modifycomment(CommentId, content) {
+    const accessToken = await getToken();
+    const submiturl = commentposturl + `${CommentId}/`;
+    const commentsResponse = await fetch(submiturl, {
+        method: "GET",
+        headers: {
+            Authorization: "Bearer " + accessToken,
+        },
+    });
+
+    if (!commentsResponse.ok) {
+        alert("댓글 데이터를 불러오는 중 에러 발생");
+        return;
+    }
+
+    const commentdata = await commentsResponse.json();
+
+    // 현재 사용자의 id를 가져옴
+    const userid = getUserIdFromToken(accessToken);
+
+    // Comment의 작성자 id
+    const commentauthorid = commentdata.user;
+
+    if (userid !== commentauthorid) {
+        alert("자신의 댓글만 수정할 수 있습니다.");
+        window.location.href = "..";
+        return;
+    }
+
+    const formdata = new FormData();
+    formdata.append("post", postid);
+    formdata.append("content", content);
+
+    fetch(submiturl, {
+        method: "PUT",
+        headers: {
+            Authorization: "Bearer " + accessToken,
+        },
+        body: formdata,
+    })
+        .then((response) => {
+            if (!response.ok) {
+                alert("대댓글 수정 실패...");
+            } else {
+                window.location.reload();
+            }
+            return response.json();
+        })
+        .then(() => {})
+        .catch((error) => {
+            console.error("Error:", error);
+            alert("대댓글 수정 실패");
+        });
+}
+async function deletecomment(commentid) {
+    const accessToken = await getToken();
+    const submiturl = commentposturl + `${commentid}/`;
+
+    const commentsResponse = await fetch(submiturl, {
+        method: "GET",
+        headers: {
+            Authorization: "Bearer " + accessToken,
+        },
+    });
+
+    if (!commentsResponse.ok) {
+        alert("댓글 데이터를 불러오는 중 에러 발생");
+        return;
+    }
+
+    const commentdata = await commentsResponse.json();
+
+    // 현재 사용자의 id를 가져옴
+    const userid = getUserIdFromToken(accessToken);
+
+    // Comment의 작성자 id
+    const commentauthorid = commentdata.user;
+
+    if (userid !== commentauthorid) {
+        alert("자신의 댓글만 삭제할 수 있습니다.");
+        window.location.href = "..";
+        return;
+    }
+    fetch(submiturl, {
+        method: "DELETE",
+        headers: {
+            Authorization: "Bearer " + accessToken,
+        },
+    })
+        .then((response) => {
+            if (!response.ok) {
+                alert("댓글 삭제 실패...");
+            } else {
+                window.location.reload();
+            }
+        })
+
+        .catch((error) => {
+            console.error("Error:", error);
+            alert("댓글 삭제 실패");
+        });
+}

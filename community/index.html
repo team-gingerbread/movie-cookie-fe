@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="ko-KR">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title></title>
+        <link rel="stylesheet" href="/style/base.css" />
+        <link rel="stylesheet" href="./style/style.css" />
+    </head>
+
+    <body>
+        <header>
+            <nav>
+                <div onclick="location.href='/'" class="headertitle cookiestyle-light">Movie Cookie</div>
+                <ul>
+                    <a href="/movieinfo/"><li>정보찾기</li></a>
+                    <a href="/community/"><li>커뮤니티</li></a>
+                    <a href="/recommend/"><li>영화추천</li></a>
+                    <!-- 로그인 X -->
+                    <a href="/accounts/login/"><li>로그인</li></a>
+                    <a href="/accounts/signup/"><li>회원가입</li></a>
+                    <!-- 로그인 O -->
+                    <a href="/accounts/mypage/"><li>마이페이지</li></a>
+                    <a href="#" id="logout"><li>로그아웃</li></a>
+                </ul>
+            </nav>
+        </header>
+
+        <main>
+            <div class="main-content">
+                <div class="content-head">
+                    <div class="content-title cookiestyle-strong">커뮤니티</div>
+                    <div class="content-buttons"></div>
+                    <br />
+                    <form method="get" class="search-area">
+                        <input type="text" class="searchbar cookiestyle-light" placeholder="검색어를 입력하세요" id="search" name="search" />
+                        <button type="submit" class="btn cookiestyle-light" id="search_btn">검색</button>
+                    </form>
+                </div>
+                <div class="btn-box">
+                    <button type="submit" class="btn cookiestyle-light" id="postlist_btn" onclick="location.href='/community/';">글목록</button>
+
+                    <button type="submit" class="btn cookiestyle-light" id="write_btn" onclick="location.href='/community/write/';">글쓰기</button>
+                </div>
+                <div class="bar"></div>
+                <div class="content-body">
+                    <table>
+                        <thead>
+                            <tr class="cookiestyle-light">
+                                <th>제목</th>
+                                <th>글쓴이</th>
+                                <th>작성시간</th>
+                            </tr>
+                        </thead>
+                        <tbody></tbody>
+                    </table>
+                </div>
+            </div>
+        </main>
+        <footer>
+            <p>Copyright 2023 Team Gingerbread All Rights Reserved.</p>
+        </footer>
+        <script type="module" src="./script/index.js"></script>
+        <script type="module" src="../script/base.js"></script>
+    </body>
+</html>

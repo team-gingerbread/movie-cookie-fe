@@ -23,6 +23,7 @@ document.addEventListener("DOMContentLoaded", async function () {
         }
 
         fetch(`${backend}accounts/api/user-profile/${userId}/`, {
+            method: "GET",
             headers: {
                 Authorization: "Bearer " + accessToken,
             },
@@ -41,6 +42,48 @@ document.addEventListener("DOMContentLoaded", async function () {
             });
     }
 
+    // function updateProfileForm(userData) {
+    //     usernameInput.value = userData.username;
+    //     emailInput.value = userData.email;
+    //     nicknameInput.value = userData.nickname;
+    //     bioInput.value = userData.bio || "";
+
+    //     updateProfileButton.addEventListener("click", function (event) {
+    //         event.preventDefault();
+
+    //         const requestBody = {
+    //             new_password1: newPasswordInput.value,
+    //             new_password2: newPassword2Input.value,
+    //             old_password: currentPasswordInput.value,
+    //             email: emailInput.value,
+    //             nickname: nicknameInput.value,
+    //             bio: bioInput.value,
+    //         };
+
+    //         fetch(`${backend}accounts/password/change/`, {
+    //             method: "POST",
+    //             headers: {
+    //                 "Content-Type": "application/json",
+    //                 Authorization: "Bearer " + accessToken,
+    //             },
+    //             body: JSON.stringify(requestBody),
+    //         })
+    //             .then((response) => {
+    //                 if (!response.ok) {
+    //                     throw new Error(`프로필 수정에 실패했습니다. 응답코드: ${response.status}`);
+    //                 }
+    //                 return response.json();
+    //             })
+    //             .then((data) => {
+    //                 window.location.href = "/accounts/mypage/";
+    //             })
+    //             .catch((error) => {
+    //                 console.error("Error:", error);
+    //                 alert("프로필 수정에 실패했습니다.");
+    //             });
+    //     });
+    // }
+
     function updateProfileForm(userData) {
         usernameInput.value = userData.username;
         emailInput.value = userData.email;
@@ -50,37 +93,78 @@ document.addEventListener("DOMContentLoaded", async function () {
         updateProfileButton.addEventListener("click", function (event) {
             event.preventDefault();
 
-            const requestBody = {
-                new_password1: newPasswordInput.value,
-                new_password2: newPassword2Input.value,
-                old_password: currentPasswordInput.value,
+            const profileUpdateBody = {
                 email: emailInput.value,
                 nickname: nicknameInput.value,
                 bio: bioInput.value,
             };
 
-            fetch(`${backend}accounts/password/change/`, {
-                method: "POST",
-                headers: {
-                    "Content-Type": "application/json",
-                    Authorization: "Bearer " + accessToken,
-                },
-                body: JSON.stringify(requestBody),
-            })
-                .then((response) => {
-                    if (!response.ok) {
-                        throw new Error("프로필 수정에 실패했습니다.");
-                    }
-                    return response.json();
-                })
-                .then((data) => {
-                    window.location.href = "/accounts/mypage/";
-                })
-                .catch((error) => {
-                    console.error("Error:", error);
-                    alert("프로필 수정에 실패했습니다.");
-                });
+            const passwordChangeBody = {
+                new_password1: newPasswordInput.value,
+                new_password2: newPassword2Input.value,
+                old_password: currentPasswordInput.value,
+            };
+
+            // 프로필 업데이트 요청
+            updateProfile(profileUpdateBody);
+
+            // 비밀번호 변경 요청
+            changePassword(passwordChangeBody);
         });
+    }
+
+    function updateProfile(body) {
+        fetch(`${backend}accounts/api/user-profile/${userId}/`, {
+            method: "PATCH",
+            headers: {
+                "Content-Type": "application/json",
+                Authorization: "Bearer " + accessToken,
+            },
+            body: JSON.stringify(body),
+        })
+            .then((response) => {
+                if (!response.ok) {
+                    throw new Error(`프로필 수정에 실패했습니다. 응답코드: ${response.status}`);
+                }
+                return response.json();
+            })
+            .then((data) => {
+                console.log("프로필이 성공적으로 업데이트되었습니다.", data);
+                fetchUserProfile();
+
+                // MyPage로 이동
+                window.location.pathname = "/accounts/mypage/";
+                window.location.pathname = "/accounts/mypage/";
+            })
+            .catch((error) => {
+                console.error("Error:", error);
+                alert("프로필 수정에 실패했습니다.");
+            });
+    }
+
+    function changePassword(body) {
+        fetch(`${backend}accounts/password/change/`, {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+                Authorization: "Bearer " + accessToken,
+            },
+            body: JSON.stringify(body),
+        })
+            .then((response) => {
+                if (!response.ok) {
+                    throw new Error(`비밀번호 변경에 실패했습니다. 응답코드: ${response.status}`);
+                }
+                return response.json();
+            })
+            .then((data) => {
+                console.log("비밀번호가 성공적으로 변경되었습니다.", data);
+                // 비밀번호 변경 후 추가 작업 수행
+            })
+            .catch((error) => {
+                console.error("Error:", error);
+                alert("비밀번호 변경에 실패했습니다.");
+            });
     }
 
     // 토큰에서 사용자 ID 추출하는 함수

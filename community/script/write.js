@@ -1,10 +1,11 @@
 import { backend } from "/script/url.js";
+import { getToken } from "/script/token.js";
 
 const backend_url = backend + `community/`;
 
-document.getElementById("write_btn").addEventListener("click", function (event) {
+document.getElementById("write_btn").addEventListener("click", async function (event) {
     event.preventDefault();
-    const accessToken = localStorage.getItem("access");
+    const accessToken = await getToken();
 
     if (!accessToken) {
         alert("로그인이 필요합니다.");
@@ -17,8 +18,9 @@ document.getElementById("write_btn").addEventListener("click", function (event) 
     const formdata = new FormData();
     formdata.append("title", title);
     formdata.append("content", content);
-    formdata.append("image", image);
-
+    if (image) {
+        formdata.append("image", image);
+    }
     fetch(backend_url, {
         method: "POST",
         headers: {
@@ -26,14 +28,15 @@ document.getElementById("write_btn").addEventListener("click", function (event) 
         },
         body: formdata,
     })
-        .then((response) => response.json())
-        .then((data) => {
-            if (data.id) {
-                window.location.href = "..";
-            } else {
+        .then((response) => {
+            if (!response.ok) {
                 alert("write failed...");
+            } else {
+                window.location.href = "..";
             }
+            return response.json();
         })
+        .then(() => {})
         .catch((error) => {
             console.error("Error:", error);
             alert("write failed");

@@ -1,11 +1,14 @@
-document.addEventListener("DOMContentLoaded", function () {
-    const accessToken = localStorage.getItem("access");
+import { backend } from "/script/url.js";
+import { getToken } from "/script/token.js";
+document.addEventListener("DOMContentLoaded", async function () {
+    const accessToken = await getToken();
+
+    fetchUserProfile();
 
     if (accessToken) {
         document.querySelector(".loginfield").innerHTML = `
-            <button id="profile_edit" class="btn btn-rd cookiestyle-light">프로필 수정</button>
+            <button id="profile-edit" class="btn btn-rd cookiestyle-light">프로필 수정</button>
             <button id="logoutButton" class="btn btn-rd cookiestyle-light">로그아웃</button>
-
         `;
     }
 
@@ -21,19 +24,19 @@ document.addEventListener("DOMContentLoaded", function () {
             }
         });
 
-        function updateProfileImage(file) {
-            const accessToken = localStorage.getItem("access");
+        async function updateProfileImage(file) {
+            const accessToken = await getToken();
 
             if (!accessToken) {
                 alert("로그인이 필요합니다.");
-                window.location.href = "/accounts/login/index.html";
+                window.location.href = "/accounts/login/";
                 return;
             }
 
             const formData = new FormData();
             formData.append("profile_picture", file);
 
-            fetch(`http://127.0.0.1:8000/accounts/api/user-profile/${getUserIdFromToken(accessToken)}/`, {
+            fetch(`${backend}accounts/api/user-profile/${getUserIdFromToken(accessToken)}/`, {
                 method: "PATCH",
                 headers: {
                     Authorization: "Bearer " + accessToken,
@@ -60,16 +63,12 @@ document.addEventListener("DOMContentLoaded", function () {
     document.getElementById("logoutButton").addEventListener("click", function () {
         localStorage.removeItem("access");
         localStorage.removeItem("refresh");
-        window.location.href = "/accounts/login/index.html";
+        window.location.href = "/accounts/login/";
     });
 
-    document.getElementById("profile_edit").addEventListener("click", function () {
-        window.location.href = "/accounts/mypage_edit/index.html";
+    document.getElementById("profile-edit").addEventListener("click", function () {
+        window.location.href = "/accounts/mypage-edit/";
     });
-});
-
-document.addEventListener("DOMContentLoaded", function () {
-    fetchUserProfile();
 });
 
 // 토큰에서 사용자 ID 추출하는 함수
@@ -85,16 +84,16 @@ function getUserIdFromToken(token) {
     }
 }
 
-function fetchUserProfile() {
-    const accessToken = localStorage.getItem("access");
+async function fetchUserProfile() {
+    const accessToken = await getToken();
 
     if (!accessToken) {
         alert("로그인이 필요합니다.");
-        window.location.href = "/accounts/login/index.html";
+        window.location.href = "/accounts/login/";
         return;
     }
 
-    fetch(`http://127.0.0.1:8000/accounts/api/user-profile/${getUserIdFromToken(accessToken)}`, {
+    fetch(`${backend}accounts/api/user-profile/${getUserIdFromToken(accessToken)}`, {
         headers: {
             Authorization: "Bearer " + accessToken,
         },
@@ -119,13 +118,83 @@ function updateProfileSection(userData) {
     document.querySelector(".nickname").textContent = userData.nickname;
     document.querySelector(".genre").textContent = userData.genre;
     document.querySelector(".bio").textContent = userData.bio || "소개가 없습니다.";
-    document.querySelector(".password").textContent = userData.password;
 
     if (userData.profile_picture) {
         document.querySelector(".userimg").style.backgroundImage = `url(${userData.profile_picture})`;
         document.querySelector(".userimg").style.backgroundSize = "cover";
     } else {
-        document.querySelector(".userimg").style.backgroundImage = `url('http://127.0.0.1:8000/static/images/profile_basic.png')`;
+        document.querySelector(".userimg").style.backgroundImage = `url(/img/profile_basic.png)`;
         document.querySelector(".userimg").style.backgroundSize = "cover";
     }
 }
+
+function getFirstPosterUrl(movieInfo) {
+    const posters = movieInfo.movie ? movieInfo.movie.posters : [];
+    const firstPoster = posters[0];
+    return firstPoster ? firstPoster.url : "/img/default.jpg";
+}
+
+function displayMoviesInSection(sectionId, moviesData) {
+    const sectionContainer = document.getElementById(sectionId);
+    const movieGrid = document.createElement("div");
+    movieGrid.classList.add("movie-grid");
+
+    moviesData.forEach((movie) => {
+        const movieElement = document.createElement("div");
+        movieElement.classList.add("movie");
+
+        const posterElement = document.createElement("img");
+        posterElement.src = getFirstPosterUrl(movie.movie);
+        posterElement.alt = movie.movie.title;
+        posterElement.classList.add("movie-poster");
+        movieElement.appendChild(posterElement);
+
+        const titleElement = document.createElement("h2");
+        titleElement.textContent = movie.movie.title;
+        movieElement.appendChild(titleElement);
+
+        movieGrid.appendChild(movieElement);
+    });
+
+    sectionContainer.appendChild(movieGrid);
+}
+
+document.addEventListener("DOMContentLoaded", async function () {
+    const accessToken = await getToken();
+
+    // 사용자가 좋아요한 영화 가져오기
+    const likedMoviesResponse = await fetch(`${backend}accounts/api/liked-movies/`, {
+        method: "GET",
+        headers: {
+            Authorization: "Bearer " + accessToken,
+        },
+    });
+    if (likedMoviesResponse.ok) {
+        const likedMoviesData = await likedMoviesResponse.json();
+        displayMoviesInSection("liked-movies-container", likedMoviesData);
+    }
+
+    // 사용자가 본 영화 가져오기
+    const watchedMoviesResponse = await fetch(`${backend}accounts/api/watched-movies/`, {
+        method: "GET",
+        headers: {
+            Authorization: "Bearer " + accessToken,
+        },
+    });
+    if (watchedMoviesResponse.ok) {
+        const watchedMoviesData = await watchedMoviesResponse.json();
+        displayMoviesInSection("watched-movies-container", watchedMoviesData);
+    }
+
+    // 사용자가 볼 영화 가져오기
+    const watchlistMoviesResponse = await fetch(`${backend}accounts/api/watchlist-movies/`, {
+        method: "GET",
+        headers: {
+            Authorization: "Bearer " + accessToken,
+        },
+    });
+    if (watchlistMoviesResponse.ok) {
+        const watchlistMoviesData = await watchlistMoviesResponse.json();
+        displayMoviesInSection("watchlist-movies-container", watchlistMoviesData);
+    }
+});

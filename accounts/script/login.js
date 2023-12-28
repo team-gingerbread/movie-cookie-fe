@@ -1,10 +1,11 @@
+import { backend } from "/script/url.js";
 document.getElementById("loginForm").addEventListener("submit", function (event) {
     event.preventDefault();
 
     const username = document.getElementById("username").value;
     const password = document.getElementById("password").value;
 
-    fetch("http://127.0.0.1:8000/accounts/login/", {
+    fetch(`${backend}accounts/login/`, {
         method: "POST",
         headers: {
             "Content-Type": "application/json",
@@ -18,7 +19,13 @@ document.getElementById("loginForm").addEventListener("submit", function (event)
                 // 로그인 성공 시 액세스 및 리프레시 토큰을 로컬 스토리지에 저장
                 localStorage.setItem("access", data.access_token);
                 localStorage.setItem("refresh", data.refresh_token);
-                window.location.href = "/accounts/mypage/index.html";
+                const urlParams = new URLSearchParams(window.location.search);
+                const nextPage = urlParams.get("next");
+                if (nextPage) {
+                    window.location.replace(nextPage);
+                } else {
+                    window.location.replace("/accounts/mypage/");
+                }
             } else {
                 alert("아이디 또는 패스워드가 일치하지 않습니다.");
             }

@@ -1,3 +1,4 @@
+import { backend } from "/script/url.js";
 document.getElementById("signupForm").addEventListener("submit", function (event) {
     event.preventDefault();
 
@@ -13,7 +14,7 @@ document.getElementById("signupForm").addEventListener("submit", function (event
         return;
     }
 
-    fetch("http://127.0.0.1:8000/accounts/signup/", {
+    fetch(`${backend}accounts/signup/`, {
         method: "POST",
         headers: {
             "Content-Type": "application/json",

@@ -1,5 +1,7 @@
-document.addEventListener("DOMContentLoaded", function () {
-    const accessToken = localStorage.getItem("access");
+import { backend } from "/script/url.js";
+import { getToken } from "/script/token.js";
+document.addEventListener("DOMContentLoaded", async function () {
+    const accessToken = await getToken();
 
     const usernameInput = document.getElementById("username");
     const emailInput = document.getElementById("email");
@@ -16,11 +18,11 @@ document.addEventListener("DOMContentLoaded", function () {
     function fetchUserProfile() {
         if (!accessToken || !userId) {
             alert("로그인이 필요합니다.");
-            window.location.href = "/accounts/login/index.html";
+            window.location.href = "/accounts/login/";
             return;
         }
 
-        fetch(`http://127.0.0.1:8000/accounts/api/user-profile/${userId}/`, {
+        fetch(`${backend}accounts/api/user-profile/${userId}/`, {
             headers: {
                 Authorization: "Bearer " + accessToken,
             },
@@ -57,7 +59,7 @@ document.addEventListener("DOMContentLoaded", function () {
                 bio: bioInput.value,
             };
 
-            fetch(`http://127.0.0.1:8000/accounts/password/change/`, {
+            fetch(`${backend}accounts/password/change/`, {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json",
@@ -72,7 +74,7 @@ document.addEventListener("DOMContentLoaded", function () {
                     return response.json();
                 })
                 .then((data) => {
-                    window.location.href = "/accounts/mypage/index.html";
+                    window.location.href = "/accounts/mypage/";
                 })
                 .catch((error) => {
                     console.error("Error:", error);
